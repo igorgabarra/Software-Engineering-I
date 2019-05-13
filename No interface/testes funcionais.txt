@@ -1,0 +1,90 @@
+Teste 1:
+pop1 -> pop2
+
+	exponencial
+
+	Função: 0.01 * pop1
+
+	Initial Value:
+		pop1 = 100
+		pop2 = 0
+
+
+Teste 2:
+p1 -> p2
+	
+	logistica
+
+	Função: 0.01*p2*(1-p2/70)
+
+	Initial Value:
+		p1 = 100
+		p2 = 10
+
+
+Teste 3:
+q4 -> q1
+
+	Função: 0.01*Q4
+
+	Initial Value:
+		q4 = 0
+		q1 = 100
+
+
+q1 -> q2
+	Função: 0.01*Q1
+
+	Initial Value:
+		q1 = 100
+		q2 = 0
+
+q1 -> q3
+	Função: 0.01 * Q1
+
+	Initial Value:
+		q1 = 100
+		q3 = 100
+
+q2 -> q3
+	Função: 0.01 * Q1
+
+	Initial Value:
+		q2 = 0
+		q3 = 100
+
+q2 -> q5
+	Função: 0.01 * Q2
+
+	Initial Value:
+		q2 = 0
+		q5 = 0
+
+
+q3 -> q4
+	Função: 0.01 * Q3
+
+	Initial Value:
+		q3 = 100
+		q4 = 0
+
+
+
+resultados:
+
+para tempo = 100:
+	
+	pop1 = 36.973
+	pop2 = 63.027
+
+	p1 = 88.3661
+	p2 = 21.6339
+
+	q1 = 31.9303
+	q2 = 18.45
+	q3 = 77.3844
+	q4 = 55.9586
+	q5 = 16.2767
+
+
+a cada iteração retira do source e coloca no destino
