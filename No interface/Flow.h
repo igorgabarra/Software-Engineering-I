@@ -32,15 +32,25 @@ public:
 	System* getSource();
 	System* getDestiny();
 
-	virtual float function() = 0;
+	virtual double function() = 0;
 
 	bool operator==(Flow&);
 	Flow& operator=(Flow&);
 };
 
-class FlowFunction : public Flow{
+class ExponentialFunction : public Flow{
 public:
-	float function();
+	ExponentialFunction(string, System*, System*);
+	~ExponentialFunction();
+	double function();
+};
+
+
+class LogisticFunction : public Flow{
+public:
+	LogisticFunction(string, System*, System*);
+	~LogisticFunction();
+	double function();
 };
 
 #endif

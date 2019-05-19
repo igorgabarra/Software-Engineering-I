@@ -14,24 +14,20 @@ using namespace std;
 class System{ 
 private:
 	string name;
-	float initialValue;
-	float actualValue;
+	double value;
 
 public:
 	System();
-	System(string = "", float = 0.0, float = 0.0);
+	System(string = "", double = 0.0);
 	System(System&);
 	virtual ~System();
 
 	string getName();
 	void setName(string);
 
-	float getInitial_Value();
-	void setInitial_Value(float);
+	double getValue();
+	void setValue(double);
 
-	float getActual_Value();
-	void setActual_Value(float);
-	
 	bool operator==(System&);
 	System& operator=(System&);
 };

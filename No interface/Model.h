@@ -38,7 +38,7 @@ public:
 	Flow* getFlow(string);
 	System* getSystem(string);
 
-	void execute(int, int, int);
+	void execute(int);
 
 	bool operator==(Model&);
 	Model& operator=(Model&);

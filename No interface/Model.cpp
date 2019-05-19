@@ -10,9 +10,11 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
 
 using namespace std;
-
 
 Model::Model(): name(""){}
 
@@ -45,7 +47,7 @@ void Model::add(System* system){
 }
 
 bool Model::removeFlow(string name){
-	for(int i=0; i<flows.size(); i++)
+	for(unsigned int i=0; i<flows.size(); i++)
 		if(flows[i]->getName() == name){
 			flows.erase(flows.begin()+i);
 			return true;
@@ -55,7 +57,7 @@ bool Model::removeFlow(string name){
 }
 
 bool Model::removeSystem(string name){
-	for(int i=0; i<systems.size(); i++)
+	for(unsigned int i=0; i<systems.size(); i++)
 		if(systems[i]->getName() == name){
 			systems.erase(systems.begin()+i);
 			return true;
@@ -65,7 +67,7 @@ bool Model::removeSystem(string name){
 }
 
 Flow* Model::getFlow(string name){
-	for(int i=0; i<flows.size(); i++)
+	for(unsigned int i=0; i<flows.size(); i++)
 		if(flows[i]->getName() == name){
 			return flows[i];
 		}
@@ -74,12 +76,40 @@ Flow* Model::getFlow(string name){
 }
 
 System* Model::getSystem(string name){
-	for(int i=0; i<systems.size(); i++)
+	for(unsigned int i=0; i<systems.size(); i++)
 		if(systems[i]->getName() == name){
 			return systems[i];
 		}
 
 	return NULL;
+}
+
+void Model::execute(int time){
+	int count = 0;
+
+	for(int i = 0; i < time; i++){
+		vector<double> results;
+
+		for(vector<Flow*>::iterator flow = flows.begin(); flow != flows.end(); ++flow){
+			results.push_back((*flow)->function());
+		}
+
+
+		for(vector<Flow*>::iterator flow = flows.begin(); flow != flows.end(); ++flow){
+					
+			(*flow)->getDestiny()->setValue((*flow)->getDestiny()->getValue() + results[count]);
+			(*flow)->getSource()->setValue((*flow)->getSource()->getValue() - results[count]);
+
+			count++;
+		}
+
+		for(vector<System*>::iterator system = systems.begin(); system != systems.end(); ++system){
+			(*system)->setValue((*system)->getValue());
+		}
+
+		results.clear();
+		count = 0;
+	}
 }
 
 bool Model::operator==(Model& object){

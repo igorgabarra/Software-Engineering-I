@@ -59,10 +59,28 @@ Flow& Flow::operator=(Flow& copy){
 	return *this;
 }
 
-/* ---------------------------- object FlowFunction ----------------------------- */
+/* ---------------------------- object ExponentialFunction ----------------------------- */
 
-float FlowFunction::function(){
-	return this->getSource()->getActual_Value() * 0.3;
+ExponentialFunction::ExponentialFunction(string name, System* source, System* destiny):Flow(name, source, destiny){}
+ExponentialFunction::~ExponentialFunction(){}
+
+double ExponentialFunction::function(){
+	return this->getSource()->getValue() * 0.01;
 }
 
-/* ------------------------- end of object FlowFunction ------------------------- */
+/* ------------------------- end of object ExponentialFunction ------------------------- */
+
+
+
+
+/* ------------------------------ object LogisticFunction ------------------------------ */
+
+LogisticFunction::LogisticFunction(string name, System* source, System* destiny):Flow(name, source, destiny){}
+LogisticFunction::~LogisticFunction(){}
+
+double LogisticFunction::function(){
+	double p2 = this->getDestiny()->getValue();
+	return 0.01*p2*(1-p2/70);
+}
+
+/* -------------------------- end of object LogisticFunction -------------------------- */
