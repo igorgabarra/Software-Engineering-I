@@ -16,24 +16,29 @@ using namespace std;
 
 class LogisticTest : public LogisticFunction{
 public:
+	LogisticTest();
+	virtual ~LogisticTest();
+
 	bool unit_setName(string);
 	bool unit_insert(System*, System*);
 
 	bool unit_function();
 
-	bool unit_operatorIsEqual(Flow&, Flow&);
-	bool unit_operatorAssignment(Flow&, Flow&);
+	bool unit_operatorIsEqual(LogisticFunction&, LogisticFunction&);
+	bool unit_operatorAssignment(LogisticFunction&, LogisticFunction&);
 };
 
 class ExponentialTest : public ExponentialFunction{
 public:
+	ExponentialTest();
+	virtual ~ExponentialTest();
 	bool unit_setName(string);
 	bool unit_insert(System*, System*);
 
 	bool unit_function();
 
-	bool unit_operatorIsEqual(Flow&, Flow&);
-	bool unit_operatorAssignment(Flow&, Flow&);
+	bool unit_operatorIsEqual(ExponentialFunction&, ExponentialFunction&);
+	bool unit_operatorAssignment(ExponentialFunction&, ExponentialFunction&);
 };
 
 #endif

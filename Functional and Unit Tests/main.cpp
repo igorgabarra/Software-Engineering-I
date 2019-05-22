@@ -21,7 +21,7 @@ int main(){
 	
 	system_UnitTests();
 	/* ------------------------- */
-	//flow_UnitTests();
+	flow_UnitTests();
 	/* ------------------------- */
 	model_UnitTests();
 	

@@ -14,6 +14,10 @@ using namespace std;
 
 // ---------------------- Logistic Flow Unitary Tests ----------------------
 
+LogisticTest::LogisticTest():LogisticFunction("", NULL, NULL){}
+
+LogisticTest::~LogisticTest(){}
+
 bool LogisticTest::unit_setName(string name){
 	setName(name);
 
@@ -30,11 +34,11 @@ bool LogisticTest::unit_function(){
 	return (function() == function());
 }
 
-bool LogisticTest::unit_operatorIsEqual(Flow& one, Flow& two){
+bool LogisticTest::unit_operatorIsEqual(LogisticFunction& one, LogisticFunction& two){
 	return (one == two);
 }
 
-bool LogisticTest::unit_operatorAssignment(Flow& one, Flow& two){
+bool LogisticTest::unit_operatorAssignment(LogisticFunction& one, LogisticFunction& two){
 	two = one;
 
 	return (one == two);
@@ -47,6 +51,10 @@ bool LogisticTest::unit_operatorAssignment(Flow& one, Flow& two){
 
 
 // -------------------- Exponential Flow Unitary Tests ---------------------
+
+ExponentialTest::ExponentialTest():ExponentialFunction("", NULL, NULL){}
+
+ExponentialTest::~ExponentialTest(){}
 
 bool ExponentialTest::unit_setName(string name){
 	setName(name);
@@ -64,11 +72,11 @@ bool ExponentialTest::unit_function(){
 	return (function() == function());
 }
 
-bool ExponentialTest::unit_operatorIsEqual(Flow& one, Flow& two){
+bool ExponentialTest::unit_operatorIsEqual(ExponentialFunction& one, ExponentialFunction& two){
 	return (one == two);
 }
 
-bool ExponentialTest::unit_operatorAssignment(Flow& one, Flow& two){
+bool ExponentialTest::unit_operatorAssignment(ExponentialFunction& one, ExponentialFunction& two){
 	two = one;
 
 	return (one == two);

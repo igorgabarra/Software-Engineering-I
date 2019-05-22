@@ -31,33 +31,33 @@ void system_UnitTests(){
 	assert(test.unit_operatorAssignment(unit, unit));
 }
 
-/*
+
 void flow_UnitTests(){
 	System* one = new System("one", 1.0);
 	System* two = new System("two", 2.2);
 
 	LogisticTest test;
 
-	LogisticFunction* unitFlow = new LogisticFunction("unit", one, two);
+	LogisticFunction unitFlow("unit", one, two);
 
 	assert(test.unit_setName("test"));
 	assert(test.unit_insert(two, one));
-	assert(test.unit_function());
+
 	assert(test.unit_operatorIsEqual(unitFlow, unitFlow));
 	assert(test.unit_operatorAssignment(unitFlow, unitFlow));
 
 
 	ExponentialTest test1;
 
-	ExponentialFunction* unitEFlow = new ExponentialFunction("unit", one, two);
+	ExponentialFunction unitEFlow("unit", one, two);
 
 	assert(test1.unit_setName("test"));
 	assert(test1.unit_insert(two, one));
-	assert(test1.unit_function());
+
 	assert(test1.unit_operatorIsEqual(unitEFlow, unitEFlow));
 	assert(test1.unit_operatorAssignment(unitEFlow, unitEFlow));
 }
-*/
+
 
 void model_UnitTests(){
 	ModelTest test;
