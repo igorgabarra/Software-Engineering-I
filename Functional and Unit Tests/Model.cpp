@@ -113,7 +113,32 @@ void Model::execute(int time){
 }
 
 bool Model::operator==(Model& object){
-	return (this->name == object.getName());
+	bool equalFlows = true, equalSystems = true;
+
+	int count = 0;
+
+	for(auto it :this->flows){
+		if(it == object.flows[count]){}
+
+		else{
+			equalFlows = false;
+			break;
+		}
+		count++;
+	}
+
+	count = 0;
+
+	for(auto it : this->systems){
+		if(it == object.systems[count]){}
+		else{
+			equalSystems = false;
+			break;
+		}
+		count++;
+	}
+
+	return (this->name == object.getName() && equalFlows && equalSystems);
 }
 
 Model& Model::operator=(Model& copy){
