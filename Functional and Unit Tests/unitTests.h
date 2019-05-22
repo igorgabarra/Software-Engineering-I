@@ -24,6 +24,8 @@ void system_UnitTests(){
 	SystemTest test;
 
 	System unit("unit1", 100.0);
+	assert(unit.getName() == "unit1"); //Constructor unitary tests
+	assert(unit.getValue() == 100.0);  //Constructor unitary tests
 
 	assert(test.unit_setName("test1"));
 	assert(test.unit_setValue(10.9));
@@ -39,6 +41,10 @@ void flow_UnitTests(){
 	LogisticTest test;
 
 	LogisticFunction unitFlow("unit", one, two);
+
+	assert(unitFlow.getName() == "unit"); //Constructor unitary tests
+	assert(unitFlow.getSource() == one);  //Constructor unitary tests
+	assert(unitFlow.getDestiny() == two); //Constructor unitary tests
 
 	assert(test.unit_setName("test"));
 	assert(test.unit_insert(two, one));
@@ -63,6 +69,8 @@ void model_UnitTests(){
 	ModelTest test;
 
 	Model model("model");
+
+	assert(model.getName() == "model"); //Constructor unitary tests
 
 	System* one = new System("one", 1.0);
 	System* two = new System("two", 2.2);
