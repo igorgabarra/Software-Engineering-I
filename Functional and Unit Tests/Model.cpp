@@ -146,7 +146,35 @@ Model& Model::operator=(Model& copy){
 		return *this;
 
 	this->name = copy.getName();
+
+	if (flows == copy.flows){}
+	else{
+		flows.clear();
+		flows.add()
+	}
+
 	this->flows = copy.flows;
+	//Only copying pontters
+	//Do something to copy content
+
+	if(systems == copy.systems){}
+	else{
+		for(auto it : systems)
+			delete it;
+
+		for(auto it : copy)
+			systems.add(new System(copy.getName(), copy.getValue()));
+		
+	}
+
+	if(systems == copy.systems){}
+	else{
+		for(auto it : flows)
+			delete it;
+
+		//for(auto it : copy)
+			//flows.add(new  )
+	}
 	this->systems = copy.systems;
 
 	return *this;
