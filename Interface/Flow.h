@@ -13,7 +13,6 @@
 using namespace std;
 
 class Flow{
-
 public:
 	virtual ~Flow(){};
 
@@ -25,8 +24,11 @@ public:
 	virtual System* getSource()				= 0;
 	virtual System* getDestiny()			= 0;
 
-	virtual float function()				= 0;
+	virtual double function()				= 0;
 
 	virtual bool operator==(Flow&)			= 0;
 	virtual Flow& operator=(Flow&)			= 0;
+
 };
+
+#endif

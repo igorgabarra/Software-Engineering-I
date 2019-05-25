@@ -8,11 +8,13 @@
 #define flowimplemented_h
 
 #include <string>
-#include "system.h"
+#include "System.h"
+#include "Flow.h"
 
 using namespace std;
 
 class FlowImplemented : public Flow{
+protected:
 	string name;
 	System* source;
 	System* destiny;
@@ -20,7 +22,7 @@ class FlowImplemented : public Flow{
 public:
 	FlowImplemented();
 	FlowImplemented(string, System*, System*);
-	FlowImplemented(FlowImplemented&);
+	FlowImplemented(Flow&);
 
 	virtual ~FlowImplemented(){};
 
@@ -32,8 +34,10 @@ public:
 	System* getSource();
 	System* getDestiny();
 
-	virtual float function() = 0;
+	virtual double function() = 0;
 
-	bool operator==(FlowImplemented&);
-	FlowImplemented& operator=(FlowImplemented&);
+	bool operator==(Flow&);
+	Flow& operator=(Flow&);
 };
+
+#endif

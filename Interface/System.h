@@ -12,20 +12,17 @@
 using namespace std;
 
 class System{
-
 public:
-	virtual ~System(){};
-
 	virtual string getName()				= 0;
 	virtual void setName(string)			= 0;
 
-	virtual float getInitial_Value()		= 0;
-	virtual void setInitial_Value(float)	= 0;
-
-	virtual float getActual_Value()			= 0;
-	virtual void setActual_Value(float)		= 0;
+	virtual double getValue()				= 0;
+	virtual void setValue(double)			= 0;
 
 	virtual bool operator==(System&)		= 0;
 	virtual System& operator=(System&)		= 0;
 
 };
+
+
+#endif

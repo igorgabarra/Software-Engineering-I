@@ -4,6 +4,8 @@
 	Universidade Federal de Ouro Preto
 */
 
+#include "Flow.h"
+#include "System.h"
 #include "FlowImplemented.h"
 
 #include <string>
@@ -15,22 +17,19 @@ FlowImplemented::FlowImplemented():name(""), source(NULL), destiny(NULL){}
 FlowImplemented::FlowImplemented(string name, System* source, System* destiny): name(name), source(source), destiny(destiny){}
 
 FlowImplemented::FlowImplemented(Flow& copy){
-	if(this == copy)
-		return *this;
+	if(this == &copy){}
 
-	setName(copy->getName());
-	insert(copy->getSource(), copy->getDestiny());
-
-	return *this;
+	else{
+		setName(copy.getName());
+		insert(copy.getSource(), copy.getDestiny());
+	}
 }
-
-FlowImplemented::~FlowImplemented(){}
 
 string FlowImplemented::getName(){
-	return name;
+	return name;	
 }
 
-void FlowImplemented::setname(string name){
+void FlowImplemented::setName(string name){
 	this->name = name;
 }
 
@@ -47,16 +46,16 @@ System* FlowImplemented::getDestiny(){
 	return destiny;
 }
 
-bool FlowImplemented::operator==(FlowImplemented& object){
-	return (this->name == object->getName() && this->source == object->getSource() && this->destiny == object->getDestiny());
+bool FlowImplemented::operator==(Flow& object){
+	return (this->name == object.getName() && this->source == object.getSource() && this->destiny == object.getDestiny());
 }
 
-FlowImplemented& FlowImplemented::operator=(FlowImplemented& copy){
-	if(this == copy)
+Flow& FlowImplemented::operator=(Flow& copy){
+	if(this == &copy)
 		return *this;
 
-	setName(copy->getName());
-	insert(copy->getSource(), copy->getDestiny());
+	setName(copy.getName());
+	insert(copy.getSource(), copy.getDestiny());	
 
 	return *this;
 }
