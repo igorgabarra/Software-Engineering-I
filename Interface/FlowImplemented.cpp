@@ -7,6 +7,7 @@
 #include "Flow.h"
 #include "System.h"
 #include "FlowImplemented.h"
+#include "SystemImplemented.h"
 
 #include <string>
 
@@ -23,6 +24,24 @@ FlowImplemented::FlowImplemented(Flow& copy){
 		setName(copy.getName());
 		insert(copy.getSource(), copy.getDestiny());
 	}
+}
+
+FlowImplemented::~FlowImplemented(){
+	SystemImplemented* del;
+
+	del = dynamic_cast<SystemImplemented*>(source);
+	
+	if(del != NULL)
+		delete del;
+
+	del = dynamic_cast<SystemImplemented*>(destiny);
+	
+	if(del != NULL)
+		delete del;
+
+	source  = NULL;
+	destiny = NULL;
+
 }
 
 string FlowImplemented::getName(){

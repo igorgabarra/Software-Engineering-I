@@ -8,21 +8,25 @@
 #define modelimplemented_h
 
 #include <string>
-#include "FlowImplemented.h"
-#include "SystemImplemented.h"
+#include "Flow.h"
+#include "System.h"
+#include "Model.h"
+
+#include <vector>
 
 using namespace std;
 
 class ModelImplemented : public Model{
+protected:
 	string name;
 	vector<Flow*> flows;
 	vector<System*> systems;
 
 public:
 	ModelImplemented();
-	ModelImplemented(string = "");
-	ModelImplemented(ModelImplemented&);
-	virtual ~Model(){};
+	ModelImplemented(string);
+	ModelImplemented(Model&);
+	virtual ~ModelImplemented();
 
 	string getName();
 	void setName(string);
@@ -30,12 +34,16 @@ public:
 	void add(Flow*);
 	void add(System*);
 
-	bool removeFlow();
+	bool removeFlow(string);
 	bool removeSystem(string);
 
-	FLow* getFlow(string);
+	Flow* getFlow(string);
 	System* getSystem(string);
 
-	bool operator==(ModelImplemented&);
-	ModelImplemented& operator=(ModelImplemented&);
+	void execute(int);
+
+	bool operator==(Model&);
+	Model& operator=(Model&);
 };
+
+#endif

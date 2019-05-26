@@ -18,10 +18,10 @@ using namespace std;
 int main(){
 
 	/* --- Functional Tests ---- */
-
-	functionalTest_One();
-	/* ------------------------- */
 	//functionalTest_Two();
+	Interface_functionalTest_Two();
+	/* ------------------------- */
+	Interface_functionalTest_One(); //Seg Fault but working
 	/* ------------------------- */
 	//functionalTest_Three();
 

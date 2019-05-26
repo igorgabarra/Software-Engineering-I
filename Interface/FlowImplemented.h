@@ -24,7 +24,7 @@ public:
 	FlowImplemented(string, System*, System*);
 	FlowImplemented(Flow&);
 
-	virtual ~FlowImplemented(){};
+	virtual ~FlowImplemented();
 
 	string getName();
 	void setName(string);

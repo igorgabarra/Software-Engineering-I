@@ -12,6 +12,8 @@
 #include "FlowFunction.h"
 #include "System.h"
 #include "SystemImplemented.h"
+#include "Model.h"
+#include "ModelImplemented.h"
 
 //#include "Model.h"
 
@@ -20,30 +22,77 @@
 
 using namespace std;
 
-void functionalTest_One(){
+void Interface_functionalTest_One(){
+
+//System tests
 	System* pop1 = new SystemImplemented("pop1", 100.0);
 	System* pop2 = new SystemImplemented("pop2", 0.0);
 
 	assert(pop1->getValue() == 100);
 	assert(pop2->getValue() == 0.0);
 
-	//pop1->setValue(1000);
-
-	//assert(pop1->getValue() == 1000);
-
 	assert(!(pop1 == pop2));	
 
-	Flow* exponential = new ExponentialFlow("exponential", pop1, pop2);
 
-	//assert(exponential->getSource()->getValue() == 1000);
+//Flow tests
+	Flow* exponential  = new ExponentialFlow("exponential",  pop1, pop2);
 
 	Flow* exponential1 = new ExponentialFlow("exponential1", pop2, pop1);	
 
-	cout << exponential1->getSource()->getValue() << endl;
-	exponential1 = exponential;
-	cout << exponential1->getSource()->getValue() << endl;
+	assert(abs( exponential->getSource()->getValue() - 100.0) < 0.1);
 
+	assert(abs(exponential1->getSource()->getValue() - 0.0)   < 0.1);
+
+	exponential1 = exponential;
+
+	assert(exponential1 == exponential);
+
+
+	ExponentialFlow* delF = dynamic_cast<ExponentialFlow*>(exponential1);
+	if(delF != NULL)
+		delete delF;
+
+	ExponentialFlow* delF2 = dynamic_cast<ExponentialFlow*>(exponential);
+	if(delF2 != NULL)
+		delete delF2;
+
+	SystemImplemented* del = dynamic_cast<SystemImplemented*>(pop1);
+	if(del != NULL)
+		delete del;
+
+	//For some reason, segmentation fault is occurring at line 59
+
+	exponential  = NULL;
+	exponential1 = NULL;
+	pop1         = NULL;
+
+	cout << exponential1->getSource()->getValue() << endl;	
+//	cout << pop1->getValue() << endl;  ----- Will not work: deleted pop1
+	cout << pop2->getValue() << endl;	
+
+	SystemImplemented* delS2 = dynamic_cast<SystemImplemented*>(pop2);
+	if(delS2 != NULL)
+		delete delS2;
+
+	pop1 = NULL;
 }
+
+void Interface_functionalTest_Two(){
+	System* p1 = new SystemImplemented("p1", 100);
+	System* p2 = new SystemImplemented("p2", 10);
+
+	Flow* logistic = new LogisticFlow("logistic", p1, p2);
+
+	Model* model1 = new ModelImplemented("functional test 2");
+
+	model1->add(logistic);
+
+	model1->execute(100);
+
+	assert(abs(model1->getFlow("logistic")->getSource()->getValue() - 88.2167) < 0.0001);
+	assert(abs(model1->getFlow("logistic")->getDestiny()->getValue() - 21.7834) < 0.0001);
+}
+
 
 /*
 void functionalTest_Two(){
