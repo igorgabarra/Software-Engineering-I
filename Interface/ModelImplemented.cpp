@@ -24,7 +24,6 @@ ModelImplemented::ModelImplemented(Model& copy){
 		name = ((ModelImplemented)copy).getName();
 
 		if(flows == ((ModelImplemented)copy).flows){}
-
 		else{
 			vector<int> auxiliar;
 			//Necessary to dynamic_cast each flow (discover exponential or logistic)
@@ -45,7 +44,6 @@ ModelImplemented::ModelImplemented(Model& copy){
 			}
 		}
 
-
 		if(systems == ((ModelImplemented)copy).systems){}
 		else{
 			for(auto it : systems){
@@ -61,26 +59,7 @@ ModelImplemented::ModelImplemented(Model& copy){
 	}
 }
 
-ModelImplemented::~ModelImplemented(){
-	
-	for(auto it : systems){
-		SystemImplemented* del = dynamic_cast<SystemImplemented*>(it);
-		
-		if(del != NULL)
-			delete del;
-
-		it = NULL;
-	}
-
-	for(auto it : flows){
-		FlowImplemented* del = dynamic_cast<FlowImplemented*>(it);
-		
-		if(del != NULL)
-			delete del;
-
-		it = NULL;
-	}	
-}
+ModelImplemented::~ModelImplemented(){}
 
 string ModelImplemented::getName(){
 	return name;
@@ -166,17 +145,16 @@ void ModelImplemented::execute(int time){
 
 
 bool ModelImplemented::operator==(Model& object){
-	bool equalFlows = true, equalSystems = true;
+	if(name != ((ModelImplemented)object).getName())
+		return false; 
 
 	int count = 0;
 
 	for(auto it : flows){
 		if(it == ((ModelImplemented)object).flows[count]){}
 
-		else{
-			equalFlows = false;
-			break;
-		}
+		else return false;
+
 		count++;
 	}
 
@@ -185,14 +163,12 @@ bool ModelImplemented::operator==(Model& object){
 	for(auto it : systems){
 		if(it == ((ModelImplemented)object).systems[count]){}
 		
-		else{
-			equalSystems = false;
-			break;
-		}
+		else return false;
+
 		count++;
 	}
 
-	return (this->name == ((ModelImplemented)object).getName() && equalFlows && equalSystems);
+	return true;
 }
 
 Model& ModelImplemented::operator=(Model& copy){
@@ -202,7 +178,6 @@ Model& ModelImplemented::operator=(Model& copy){
 	name = ((ModelImplemented)copy).getName();
 
 	if(flows == ((ModelImplemented)copy).flows){}
-
 	else{
 		vector<int> auxiliar;
 		//Necessary to dynamic_cast each flow (discover exponential or logistic)
@@ -211,30 +186,31 @@ Model& ModelImplemented::operator=(Model& copy){
 			if(it != NULL)
 				delete it;
 
+		flows.clear();
+
 		ExponentialFlow* exp;
 		LogisticFlow* log;
 
 		for(auto it : ((ModelImplemented)copy).flows){
 			if( (exp = dynamic_cast<ExponentialFlow*>(it)) != NULL)
-				add(new ExponentialFlow(exp->getName(), exp->getSource(), exp->getDestiny()));
+				add(new ExponentialFlow(*exp));
 
 			else if((log = dynamic_cast<LogisticFlow*>(it)) != NULL)
-				add(new LogisticFlow(log->getName(), log->getSource(), log->getDestiny()));
+				add(new LogisticFlow(*log));
 		}
 	}
 
 
 	if(systems == ((ModelImplemented)copy).systems){}
 	else{
-		for(auto it : systems){
-			SystemImplemented* del = dynamic_cast<SystemImplemented*>(it);
-			
+		for(auto del : systems)			
 			if(del != NULL)
 				delete del;
-		}
+
+		systems.clear();
 
 		for(auto it : ((ModelImplemented)copy).systems)
-			add(new SystemImplemented(it->getName(), it->getValue()));
+			add(new SystemImplemented(*it));
 	}
 
 	return *this;

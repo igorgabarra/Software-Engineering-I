@@ -13,6 +13,8 @@ using namespace std;
 
 class System{
 public:
+	virtual ~System(){};
+
 	virtual string getName()				= 0;
 	virtual void setName(string)			= 0;
 

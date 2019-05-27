@@ -17,6 +17,9 @@ using namespace std;
 class Model{
 
 public:
+
+	virtual ~Model(){};
+
 	virtual string getName()					= 0;
 	virtual void setName(string)				= 0;
 

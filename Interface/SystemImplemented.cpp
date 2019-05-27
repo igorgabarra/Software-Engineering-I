@@ -15,9 +15,7 @@ SystemImplemented::SystemImplemented():name(""), value(0.0){} //, actualValue(0.
 SystemImplemented::SystemImplemented(string name, double value): name(name), value(value){}
 
 SystemImplemented::SystemImplemented(System& copy){
-	if(this == &copy){}
-
-	else{
+	if(this != &copy){
 		setName(((SystemImplemented)copy).getName());
 		setValue(((SystemImplemented)copy).getValue());
 	}
@@ -38,11 +36,11 @@ double SystemImplemented::getValue(){
 }
 
 void SystemImplemented::setValue(double initialValue){
-	this->value = initialValue;
+	value = initialValue;
 }
 
 bool SystemImplemented::operator==(System& object){
-	return (this->name == ((SystemImplemented)object).name && this->value == ((SystemImplemented)object).value);
+	return (name == ((SystemImplemented)object).name && value == ((SystemImplemented)object).value);
 }
 
 System& SystemImplemented::operator=(System& copy){

@@ -26,23 +26,7 @@ FlowImplemented::FlowImplemented(Flow& copy){
 	}
 }
 
-FlowImplemented::~FlowImplemented(){
-	SystemImplemented* del;
-
-	del = dynamic_cast<SystemImplemented*>(source);
-	
-	if(del != NULL)
-		delete del;
-
-	del = dynamic_cast<SystemImplemented*>(destiny);
-	
-	if(del != NULL)
-		delete del;
-
-	source  = NULL;
-	destiny = NULL;
-
-}
+FlowImplemented::~FlowImplemented(){}
 
 string FlowImplemented::getName(){
 	return name;	
@@ -53,8 +37,14 @@ void FlowImplemented::setName(string name){
 }
 
 void FlowImplemented::insert(System* source, System* destiny){
-	this->source  = source;
-	this->destiny = destiny;
+	if(source != NULL)
+		delete source;
+
+	if(destiny != NULL)
+		delete destiny;
+
+	source  = new SystemImplemented(*source);
+	destiny = new SystemImplemented(*destiny);
 }
 
 System* FlowImplemented::getSource(){
@@ -66,12 +56,18 @@ System* FlowImplemented::getDestiny(){
 }
 
 bool FlowImplemented::operator==(Flow& object){
-	return (this->name == object.getName() && this->source == object.getSource() && this->destiny == object.getDestiny());
+	return (name == object.getName() && source == object.getSource() && destiny == object.getDestiny());
 }
 
 Flow& FlowImplemented::operator=(Flow& copy){
 	if(this == &copy)
 		return *this;
+
+	if(source != NULL)
+		delete source;
+
+	if(destiny != NULL)
+		delete destiny;
 
 	setName(copy.getName());
 	insert(copy.getSource(), copy.getDestiny());	
